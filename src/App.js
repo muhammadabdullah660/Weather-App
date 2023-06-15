@@ -11,17 +11,22 @@ export default class App extends Component {
     };
   }
   getWeatherData = async () => {
-    const url = `https://api.weatherapi.com/v1/current.json?key=7bacfcd5c71e46a4aec62558231506&q=${this.state.city}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
+    try {
+      const url = `https://api.weatherapi.com/v1/current.json?key=7bacfcd5c71e46a4aec62558231506&q=${this.state.city}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      this.setState({ weatherData: data });
+      //console.log(this.state.weatherData);
+    } catch (error) {
+      console.log(error);
+    }
   };
   onSearch = (event) => {
     this.getWeatherData();
   };
   onChange = (event) => {
     this.setState({ city: event.target.value });
-    console.log(this.state.city);
+    //console.log(this.state.city);
   };
 
   render() {

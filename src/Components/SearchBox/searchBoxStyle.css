@@ -1,0 +1,33 @@
+.searchBox {
+  border: none;
+  outline: none;
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.searchButton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #224aff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+}
+
+.searchButton:hover {
+  background-color: #fff;
+  color: #224aff;
+  transform: scale(1.05);
+}
+
+.searchButton:active {
+  transform: scale(0.95);
+}
