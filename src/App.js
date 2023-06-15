@@ -1,5 +1,6 @@
 import "./App.css";
 import SearchBox from "./Components/SearchBox/searchBoxComponent.jsx";
+import WeatherCard from "./Components/WeatherCard/weatherCardComponent";
 import React, { Component } from "react";
 
 export default class App extends Component {
@@ -16,17 +17,16 @@ export default class App extends Component {
       const response = await fetch(url);
       const data = await response.json();
       this.setState({ weatherData: data });
-      //console.log(this.state.weatherData);
     } catch (error) {
       console.log(error);
     }
   };
   onSearch = (event) => {
+    event.preventDefault();
     this.getWeatherData();
   };
   onChange = (event) => {
     this.setState({ city: event.target.value });
-    //console.log(this.state.city);
   };
 
   render() {
@@ -54,6 +54,12 @@ export default class App extends Component {
               onClickHandler={this.onSearch}
               onChangeHandler={this.onChange}
             />
+          </div>
+        </div>
+        <br />
+        <div className="row">
+          <div className="col-md-12">
+            <WeatherCard data={this.state.weatherData} />
           </div>
         </div>
       </div>
