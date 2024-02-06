@@ -11,16 +11,50 @@ export default class App extends Component {
       weatherData: {},
     };
   }
-  getWeatherData = async () => {
-    try {
-      const url = `https://api.weatherapi.com/v1/current.json?key=7bacfcd5c71e46a4aec62558231506&q=${this.state.city}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      this.setState({ weatherData: data });
-    } catch (error) {
-      console.log(error);
-    }
+  // using XMLHttpRequest
+  getWeatherData = () => {
+    const xhr = new XMLHttpRequest();
+    const url = `https://api.weatherapi.com/v1/current.json?key=7bacfcd5c71e46a4aec62558231506&q=${this.state.city}`;
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          this.setState({ weatherData: data });
+        } else {
+          console.error(`HTTP request failed with status ${xhr.status}`);
+        }
+      }
+    };
+
+    xhr.open("GET", url, true);
+    xhr.send();
   };
+  // using modern fetch
+  // getWeatherData = () => {
+  //   const url = `https://api.weatherapi.com/v1/current.json?key=7bacfcd5c71e46a4aec62558231506&q=${this.state.city}`;
+
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       this.setState({ weatherData: data });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  // using async await
+  // getWeatherData = async () => {
+  //   try {
+  //     const url = `https://api.weatherapi.com/v1/current.json?key=7bacfcd5c71e46a4aec62558231506&q=${this.state.city}`;
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+  //     this.setState({ weatherData: data });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   onSearch = (event) => {
     event.preventDefault();
     this.getWeatherData();
